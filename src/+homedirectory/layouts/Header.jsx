@@ -24,8 +24,8 @@ const Header = () => {
                 items-center flex-initial"
             >
                 <li className="mx-4 cursor-pointer"><Link className='font-semibold hover:text-blue-700 text-blue-600 pb-2 border-b-2 border-blue-600' to="/">Home</Link></li>
+                <li className="mx-4 cursor-pointer"><Link className='text-white font-semibold hover:text-blue-700' to="/Owner/login">Owner</Link></li>
                 <li className="mx-4 cursor-pointer"><Link className='text-white font-semibold hover:text-blue-700' to="/manufacturer/login">Manufacturer</Link></li>
-                <li className="mx-4 cursor-pointer"><Link className='text-white font-semibold hover:text-blue-700' to="/retailer/login">Retailer</Link></li>
                 <li className="mx-4 cursor-pointer"><Link className='text-white font-semibold hover:text-blue-700' to="/customer">Customer</Link></li>
             </ul>
 

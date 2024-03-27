@@ -101,7 +101,9 @@ const ProductTable = () => {
                                 <th className="py-2 px-4 border-b text-center text-lg">S/N</th>
                                 <th className="py-2 px-4 border-b text-start text-lg uppercase">Qr-Code Id</th>
                                 <th className="py-2 px-4 border-b text-start text-lg uppercase">Qr-Code Hash</th>
-                                <th className="py-2 px-4 border-b text-start text-lg uppercase">Qr-Code </th>
+                                <th className="py-2 px-4 border-b text-start text-lg uppercase">Product Name</th>
+                                <th className="py-2 px-4 border-b text-start text-lg uppercase">Description</th>
+                                <th className="py-2 px-4 border-b text-start text-lg uppercase">Qr-Codes</th>
                                 <th className="py-2 px-4 border-b text-start text-lg uppercase">Downloads </th>
 
                                 <th className="py-2 px-4 border-b text-center text-lg flex col-span-2 justify-center uppercase">Actions</th>
@@ -126,6 +128,8 @@ const ProductTable = () => {
                                         <td className={`py-2 px-4 text-gray-700 text-base border-b dark:text-gray-500 ${hoveredRow === index ? 'bg-gray-200 dark:bg-gray-900' : ''}`}>{index + 1}</td>
                                         <td className={`py-2 px-4 text-gray-700 text-base border-b dark:text-gray-500 ${hoveredRow === index ? 'bg-gray-200 dark:bg-gray-900' : ''}`}>{qrCode.blockId} </td>
                                         <td className={`py-2 px-4 text-gray-700 text-base border-b dark:text-gray-500 ${hoveredRow === index ? 'bg-gray-200 dark:bg-gray-900' : ''}`}>{qrCode.qrHash} </td>
+                                        <td className={`py-2 px-4 text-gray-700 text-base border-b dark:text-gray-500 ${hoveredRow === index ? 'bg-gray-200 dark:bg-gray-900' : ''}`}>{qrCode.name} </td>
+                                        <td className={`py-2 px-4 text-gray-700 text-base border-b dark:text-gray-500 ${hoveredRow === index ? 'bg-gray-200 dark:bg-gray-900' : ''}`}>{qrCode.description} </td>
                                         <td className={`py-2 px-4 text-gray-700 text-base border-b dark:text-gray-500 ${hoveredRow === index ? 'bg-gray-200 dark:bg-gray-900' : ''}`}>
                                             <QRCode
                                                 id="qrCodeEl"

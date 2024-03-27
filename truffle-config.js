@@ -34,8 +34,10 @@ module.exports = {
         sepolia: {
             provider: () => new HDWalletProvider(PRIVATE_KEY, SEPOLIA_RPC_URL),
             network_id: 11155111,
-            gasPrice: 10000000000, // # of confirmations to wait between deployments. (default: 0)
+            gas: 7000000,
+            gasPrice: 100000000000, // # of confirmations to wait between deployments. (default: 0)
             confirmations: 2,
+            networkCheckTimeout: 10000,
             timeoutBlocks: 200, // # of blocks before a deployment times out  (minimum/default: 50)
             skipDryRun: true, // Skip dry run before migrations? (default: false for public nets )
         },

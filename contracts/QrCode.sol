@@ -45,6 +45,8 @@ contract QrCode {
     }
 
     struct ItemDetails {
+        uint256 blockId;
+        string qrHash;
         string itemName;
         string description;
     }
@@ -82,6 +84,7 @@ contract QrCode {
     mapping(string => bool) public matchedItems; //matched hash to items
 
     mapping(uint256 => ItemDetails) public itemDetails;
+    string[] private productsArray;
 
     constructor() {
         owner = msg.sender;
@@ -123,6 +126,14 @@ contract QrCode {
             "Invalid password of account address"
         );
         sysOwnerMap[msg.sender].isLogin = true;
+    }
+
+    //1711497378
+
+    function systemOwnerLogin(address _SysPublicAddress, string memory _password) public onlySysOwner() {
+        // require(!medicalsCenters[_SysPublicAddress].isLogin, "You're already logged in");
+        require(compareString(sysOwnerMap[_SysPublicAddress].password, _password), "Invalid address or password");
+        sysOwnerMap[_SysPublicAddress].isLogin = true;
     }
 
     function changePassword(
@@ -338,7 +349,7 @@ contract QrCode {
     }
 
     /*@dev matches the stored hashes to each item & returns a bool for evidence */
-    function addItemDetails(
+    function addProduct(
         string memory _qrHash,
         uint256 _blockId,
         string memory _itemName,
@@ -357,10 +368,11 @@ contract QrCode {
         matchHashToId[_qrHash] = _blockId; //update by matching
         matchedItems[_qrHash] = true;
 
-        itemDetails[_blockId] = ItemDetails(_itemName, _description);
+        itemDetails[_blockId] = ItemDetails(_blockId, _qrHash, _itemName, _description);
+        productsArray.push(_qrHash);
     }
 
-    function scanItem(string memory _qrHash) external view returns (bool) {
+    function scanProduct(string memory _qrHash) external view returns (bool) {
         if (matchedItems[_qrHash]) {
             return true;
         } else {
@@ -368,11 +380,23 @@ contract QrCode {
         }
     }
 
-    function moreDetailsForScannedItem(
+    function getProductArray()
+        external
+        view
+        returns (string[] memory)
+    {
+        //onlyManufacturer
+        
+        return productsArray;
+    }
+
+    function getProduct(
         string memory _qrHash
-    ) external view returns (ItemDetails memory) {
-        uint id = matchHashToId[_qrHash];
-        return itemDetails[id];
+    ) external view returns (string memory name, string memory description) {
+        uint256 blockId = matchHashToId[_qrHash];
+        ItemDetails memory itemdetails = itemDetails[blockId];
+        name = itemdetails.itemName;
+        description = itemdetails.description;
     }
 
     // Cannot directly compare strings in Solidity
